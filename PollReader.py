@@ -1,5 +1,5 @@
-# Name:Marco Britton
-# Student ID:4710 2184
+#Name:Marco Britton
+#Student ID:4710 2184
 
 import os
 import unittest
@@ -58,16 +58,16 @@ class PollReader():
         """
 
         # iterate through each row of the data
-        for i in self.raw_data[1:]:
+        for row in self.raw_data[1:]:
 
             # split up the row by column
-            seperated = i.strip().split(' ')
+            seperated = row.strip().split(',')
 
             # map each part of the row to the correct column
             self.data_dict['month'].append(seperated[0])
             self.data_dict['date'].append(int(seperated[1]))
-            self.data_dict['sample'].append(int(seperated[2].split("")[0]))
-            self.data_dict['sample type'].append(seperated[2].split("")[1])
+            self.data_dict['sample'].append(int(seperated[2].split(" ")[0]))
+            self.data_dict['sample type'].append(seperated[2].split(" ")[1])
             self.data_dict['Harris result'].append(float(seperated[3]))
             self.data_dict['Trump result'].append(float(seperated[4]))
 
@@ -135,7 +135,7 @@ class PollReader():
         early_trump = sum(self.data_dict['Trump result'][-30:]) / 30
 
         late_harris = sum(self.data_dict['Harris result'][:30]) / 30 
-        late_trump = sum(self.data_dict['Harris result'][:30]) / 30
+        late_trump = sum(self.data_dict['Trump result'][:30]) / 30
 
         return ((late_harris - early_harris), (late_trump - early_trump))
         pass
